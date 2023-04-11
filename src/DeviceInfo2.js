@@ -12,7 +12,7 @@ const DeviceInfo2 = () => {
 
   const headers3 = {
     Authorization:
-      'Bearer 425f8b68e97c4fc39419894cde132d3f14db6dd4434040a38a954995b98fb03e',
+      'Bearer 8bd7715eb63346acaec3bf0247266e11bbfaf233df224981815a45f75527f52f',
   };
 
   useEffect(() => {
@@ -30,16 +30,13 @@ const DeviceInfo2 = () => {
   }, [beingUsed]);
 
   return (
+    <>
+        <h1 className='subheading'>Provider 3</h1>
     <div className='mid'>
-        <h1 className='heading'>Provider 3</h1>
       {
         isLoading ? (
           <Spinner
             color='dark'
-            style={{
-              height: '15rem',
-              width: '15rem',
-            }}
           >
             Loading...
           </Spinner>
@@ -51,6 +48,7 @@ const DeviceInfo2 = () => {
         )
       }
     </div>
+    </>
   );
 };
 

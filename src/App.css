@@ -1,6 +1,6 @@
 
 .heading{
-  padding: 20px;
+  padding: 10px;
   color: white;
   background-color: #2B3467;
   margin-bottom: 0;
@@ -27,17 +27,4 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: black;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

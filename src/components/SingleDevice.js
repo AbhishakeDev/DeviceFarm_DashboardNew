@@ -1,13 +1,17 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Button, Container, Spinner } from 'reactstrap';
+import { Button, Spinner } from 'reactstrap';
 import './SingleDevice.css';
+import img from '../MicrosoftTeams-image.png';
 
 const SingleDevice = ({ deviceSerial,endpoint }) => {
   const [beingUsed, setBeingUsed] = useState(false);
   const [device, setDevice] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [isReserved,setIsReserved] = useState(true);
+  const [isReleased,setIsReleased] = useState(true);
+
 
   const headers1 = {
     Authorization:
@@ -19,7 +23,7 @@ const SingleDevice = ({ deviceSerial,endpoint }) => {
   };
   const headers3 = {
     Authorization:
-      'Bearer 425f8b68e97c4fc39419894cde132d3f14db6dd4434040a38a954995b98fb03e',
+      'Bearer 8bd7715eb63346acaec3bf0247266e11bbfaf233df224981815a45f75527f52f',
   };
 
   useEffect(() => {
@@ -31,11 +35,11 @@ const SingleDevice = ({ deviceSerial,endpoint }) => {
       setDevice(result.data.device);
       setIsLoading(false);
       console.log(result);
-      setBeingUsed(device.using);
-      console.log(device.using);
+      setBeingUsed(result.data.device.using);
+      console.log(result.data.device.using)
     };
     fetchInfo();
-  }, []);
+  }, [isReleased,isReserved,beingUsed]);
 
   var reserveDevice = async (seriale) => {
     const body = {
@@ -46,25 +50,25 @@ const SingleDevice = ({ deviceSerial,endpoint }) => {
 
     });
     console.log(result);
+    if(result.data.status === 200) setIsReserved(true);
     setBeingUsed(true);
+    console.log(isReleased,isReserved)
   };
   var releaseDevice = async (seriale) => {
     const result = await axios.delete(`/${endpoint}/api/v1/user/devices/` + deviceSerial, {
               headers: endpoint==="api1"?headers1:(endpoint==="api2"?headers2:headers3),
     });
     console.log(result);
+    if(result.data.status === 200) setIsReleased(true);
     setBeingUsed(false);
+    console.log(isReleased,isReserved)
   };
 
   return (
-    <Container className={device.present ? 'Display bg-light mid border' : 'noDisplay'} fluid>
+    <div className={device.present ? 'card Display bg-light mid border' : 'noDisplay'} fluid>
       {isLoading ? (
         <Spinner
           color='primary'
-          style={{
-            height: '3rem',
-            width: '3rem',
-          }}
         >
           Loading...
         </Spinner>
@@ -74,7 +78,7 @@ const SingleDevice = ({ deviceSerial,endpoint }) => {
           {device.present && (
             <div>
               <h4 className='text'>
-                Battery : <span>{device.battery.level}</span>
+                Model : <span>{device.model}</span>
               </h4>
               <h4 className='text'>
                 Android OS : <span>{device.version}</span>
@@ -82,55 +86,59 @@ const SingleDevice = ({ deviceSerial,endpoint }) => {
               <h4 className='text'>
                 Status :
                 {beingUsed ? (
-                  <h5 className='busy text'>Busy</h5>
+                  <span className='busy text'> Busy</span>
                 ) : (
-                  <h4 className='free text'>Free</h4>
+                  <span className='free text'> Free</span>
                 )}
               </h4>
             </div>
           )}
           {/* <h4 className='text'>{device.product}</h4> */}
-          <h4 className='text udid'>UDID : {device.serial}</h4>
-          <img
+          <h4 className='udid'>UDID : {device.serial}</h4>
+          {isReleased === true || isReserved === true ?  <img
             className='img'
-            src='https://rukminim1.flixcart.com/image/416/416/k41mp3k0/mobile/f/k/d/realme-x2-rmx1992-original-imafnfe8gu3ghess.jpeg?q=70'
+            src={img}
             alt=''
-          />
+          /> : <Spinner
+          color='primary'
+        >
+          Loading...
+        </Spinner>}
           {device.present && (
             <div className='btn-container'>
               <Button
-                className='btn'
+                className='btn-sm'
                 Button
                 color='warning'
                 disabled={beingUsed}
                 onClick={() => reserveDevice(device.serial)}
                 // onClick={() => this.reserveDevice(deviceDetail.devices[0].serial)}
               >
-                Reserve Device
+                Reserve
               </Button>
               <Button
-                className='btn'
+                className='btn-sm'
                 color='danger'
                 disabled={!beingUsed}
                 onClick={() => releaseDevice(device.serial)}
                 // onClick={() => this.reserveDevice(deviceDetail.devices[0].serial)}
               >
-                Release Device
+                Release
               </Button>
               <a
                 target='_blank'
                 rel='noreferrer'
                 href={`${endpoint}/#!/control/` + device.serial}
               >
-                <Button className='btn' color='primary'>
-                  Realtime View
+                <Button className='btn-sm' color='primary'>
+                  View
                 </Button>
               </a>
             </div>
           )}
         </div>
       )}
-    </Container>
+    </div>
   );
 };
 

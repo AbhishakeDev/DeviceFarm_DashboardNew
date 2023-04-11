@@ -30,16 +30,13 @@ const DeviceInfo1 = () => {
   }, [beingUsed]);
 
   return (
+    <>
+        <h1 className='subheading'>Provider 2</h1>
     <div className='mid'>
-        <h1 className='heading'>Provider 2</h1>
       {
         isLoading ? (
           <Spinner
             color='dark'
-            style={{
-              height: '15rem',
-              width: '15rem',
-            }}
           >
             Loading...
           </Spinner>
@@ -51,6 +48,7 @@ const DeviceInfo1 = () => {
         )
       }
     </div>
+    </>
   );
 };
 
