@@ -1,16 +1,19 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Button, Spinner } from 'reactstrap';
+import { Spinner } from 'reactstrap';
 import './SingleDevice.css';
-import img from '../MicrosoftTeams-image.png';
+import img from '../android.png';
+import img2 from '../android2.png';
+import Switch from '@mui/material/Switch';
+import Tooltip from '@mui/material/Tooltip';
 
 const SingleDevice = ({ deviceSerial,endpoint }) => {
   const [beingUsed, setBeingUsed] = useState(false);
   const [device, setDevice] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [isReserved,setIsReserved] = useState(true);
-  const [isReleased,setIsReleased] = useState(true);
+  const [checked,setChecked] = useState(beingUsed);
 
 
   const headers1 = {
@@ -23,7 +26,7 @@ const SingleDevice = ({ deviceSerial,endpoint }) => {
   };
   const headers3 = {
     Authorization:
-      'Bearer 8bd7715eb63346acaec3bf0247266e11bbfaf233df224981815a45f75527f52f',
+      'Bearer 2db5ff785041433696f8dc5c47bd003d60052042983b4c84bbc6db0411d39748',
   };
 
   useEffect(() => {
@@ -36,12 +39,14 @@ const SingleDevice = ({ deviceSerial,endpoint }) => {
       setIsLoading(false);
       console.log(result);
       setBeingUsed(result.data.device.using);
-      console.log(result.data.device.using)
+      setChecked(result.data.device.using);
+      setIsReserved(result.data.device.using)
     };
     fetchInfo();
-  }, [isReleased,isReserved,beingUsed]);
+  }, [isReserved,beingUsed]);
 
   var reserveDevice = async (seriale) => {
+    setIsReserved(true)
     const body = {
       serial: seriale,
     };
@@ -52,16 +57,24 @@ const SingleDevice = ({ deviceSerial,endpoint }) => {
     console.log(result);
     if(result.data.status === 200) setIsReserved(true);
     setBeingUsed(true);
-    console.log(isReleased,isReserved)
   };
-  var releaseDevice = async (seriale) => {
+  var releaseDevice = async () => {
+    setIsReserved(false);
     const result = await axios.delete(`/${endpoint}/api/v1/user/devices/` + deviceSerial, {
               headers: endpoint==="api1"?headers1:(endpoint==="api2"?headers2:headers3),
     });
     console.log(result);
-    if(result.data.status === 200) setIsReleased(true);
     setBeingUsed(false);
-    console.log(isReleased,isReserved)
+  };
+
+  var handleChange = () => {
+    if(checked === true){
+      releaseDevice();
+    }
+    else{
+      reserveDevice(deviceSerial);
+    }
+    setChecked(!checked)
   };
 
   return (
@@ -73,8 +86,20 @@ const SingleDevice = ({ deviceSerial,endpoint }) => {
           Loading...
         </Spinner>
       ) : (
+        <Tooltip title={device.serial}>
         <div>
-          {device.present ? null : <h5 className='busy text'>Not Available</h5>}
+          {/* <h4 className='udid'>UDID : {device.serial}</h4> */}
+          {isReserved !== true ?  <img
+            className='img'
+            src={img}
+            alt=''
+          /> : <img
+          className='img'
+          src={img2}
+          alt=''
+        />
+        }
+        {device.present ? null : <h5 className='busy text'>Not Available</h5>}
           {device.present && (
             <div>
               <h4 className='text'>
@@ -93,50 +118,14 @@ const SingleDevice = ({ deviceSerial,endpoint }) => {
               </h4>
             </div>
           )}
-          {/* <h4 className='text'>{device.product}</h4> */}
-          <h4 className='udid'>UDID : {device.serial}</h4>
-          {isReleased === true || isReserved === true ?  <img
-            className='img'
-            src={img}
-            alt=''
-          /> : <Spinner
-          color='primary'
-        >
-          Loading...
-        </Spinner>}
-          {device.present && (
-            <div className='btn-container'>
-              <Button
-                className='btn-sm'
-                Button
-                color='warning'
-                disabled={beingUsed}
-                onClick={() => reserveDevice(device.serial)}
-                // onClick={() => this.reserveDevice(deviceDetail.devices[0].serial)}
-              >
-                Reserve
-              </Button>
-              <Button
-                className='btn-sm'
-                color='danger'
-                disabled={!beingUsed}
-                onClick={() => releaseDevice(device.serial)}
-                // onClick={() => this.reserveDevice(deviceDetail.devices[0].serial)}
-              >
-                Release
-              </Button>
-              <a
-                target='_blank'
-                rel='noreferrer'
-                href={`${endpoint}/#!/control/` + device.serial}
-              >
-                <Button className='btn-sm' color='primary'>
-                  View
-                </Button>
-              </a>
-            </div>
-          )}
+          <Switch
+            checked={checked}
+            onChange={handleChange}
+            color="primary"
+            name="status"
+          />
         </div>
+        </Tooltip>
       )}
     </div>
   );

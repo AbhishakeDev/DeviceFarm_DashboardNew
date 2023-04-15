@@ -1,11 +1,26 @@
 
 .heading{
-  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
   color: white;
-  background-color: #2B3467;
+  background-color: #0db3ff;
   margin-bottom: 0;
+  width: 100%;
+  text-align: center;
 }
 
+.heading-text{
+  font-size: 22px;
+  font-family: sans-serif;
+}
+
+.logo{
+  width: 35px;
+  height: 25px;
+  margin-right: 10px;
+}
 
 .App-logo {
   height: 40vmin;
@@ -17,14 +32,15 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+body{
+  background-color: #EEEEEE;
+
+}
 
 .App-header {
-  background-color: #EEEEEE;
-  min-height: 80vh;
+  padding: 5px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: black;
 }

@@ -4,6 +4,7 @@ import axios from 'axios';
 import SingleDevice from './components/SingleDevice';
 import { Spinner } from 'reactstrap';
 import './DeviceInfo.css';
+import arrow from './arrow.png'
 
 const DeviceInfo = () => {
   const [deviceDetail1, setDeviceDetail1] = useState([]);
@@ -33,9 +34,7 @@ const DeviceInfo = () => {
   }, [beingUsed]);
 
   return (
-    <>
-      <h1 className='subheading'>Provider 1</h1>
-     <div className='mid'>
+    <div className='parent-mid'><div className='mid container-mid'>
       {isLoading ? (
         <Spinner
           color='dark'
@@ -48,8 +47,9 @@ const DeviceInfo = () => {
           <SingleDevice className='device-card' key={index} deviceSerial={el} endpoint="api1"/>
         ))
       )}
+    <div className='nav-container'><a target="_blank" href="api1"><img src={arrow} className="arrow" /></a></div>
     </div>
-    </>
+      </div>
   );
 };
 

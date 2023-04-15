@@ -4,6 +4,8 @@ import axios from 'axios';
 import SingleDevice from './components/SingleDevice';
 import { Spinner } from 'reactstrap';
 import './DeviceInfo.css';
+import arrow from './arrow.png';
+
 
 const DeviceInfo2 = () => {
   const [deviceDetail3, setDeviceDetail3] = useState([]);
@@ -12,7 +14,7 @@ const DeviceInfo2 = () => {
 
   const headers3 = {
     Authorization:
-      'Bearer 8bd7715eb63346acaec3bf0247266e11bbfaf233df224981815a45f75527f52f',
+      'Bearer 2db5ff785041433696f8dc5c47bd003d60052042983b4c84bbc6db0411d39748',
   };
 
   useEffect(() => {
@@ -30,25 +32,22 @@ const DeviceInfo2 = () => {
   }, [beingUsed]);
 
   return (
-    <>
-        <h1 className='subheading'>Provider 3</h1>
-    <div className='mid'>
-      {
-        isLoading ? (
-          <Spinner
-            color='dark'
-          >
-            Loading...
-          </Spinner>
-        ) : (
-          deviceDetail3 &&
-          deviceDetail3.map((el, index) => (
-            <SingleDevice className='device-card' key={index} deviceSerial={el} endpoint="api3"/>
-          ))
-        )
-      }
+    <div className='parent-mid'><div className='mid container-mid'>
+      {isLoading ? (
+        <Spinner
+          color='dark'
+        >
+          Loading...
+        </Spinner>
+      ) : (
+        deviceDetail3 &&
+        deviceDetail3.map((el, index) => (
+          <SingleDevice className='device-card' key={index} deviceSerial={el} endpoint="api3"/>
+        ))
+      )}
+    <div className='nav-container'><a target="_blank" href="api3"><img src={arrow} className="arrow" /></a></div>
     </div>
-    </>
+    </div>
   );
 };
 
