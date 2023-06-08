@@ -12,7 +12,7 @@ const DeviceInfo = () => {
   const [beingUsed, setBeingUsed] = useState(false);
   const headers1 = {
     Authorization:
-      'Bearer 79b374d9c1ba493b824972456e0c5c74d0256e2b8dd0471fac9a6ee4a89b081b',
+      'Bearer 3843cef74f7042249cc1aca5f0a7d8226673c40d600946c0b7c134eb997dcc77',
   };
 
   // function timeout(delay) {

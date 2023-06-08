@@ -6,26 +6,27 @@ import { Spinner } from 'reactstrap';
 import './DeviceInfo.css';
 import arrow from './arrow.png';
 
-const DeviceInfo1 = () => {
-  const [deviceDetail2, setDeviceDetail2] = useState([]);
+
+const DeviceInfo4 = () => {
+  const [deviceDetail3, setDeviceDetail3] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [beingUsed, setBeingUsed] = useState(false);
 
-  const headers2 = {
+  const headers3 = {
     Authorization:
-      'Bearer f774b68e0d134f1fb503c318582f524c741316cf84194799957ba4aa098ef560',
+      'Bearer 192402ab37bd4f42892f0020d155428368c0775bf3c7449b944ab3566bde4d53',
   };
 
   useEffect(() => {
     const fetchInfo = async () => {
-      const result2 = await axios.get(`/api2/api/v1/devices`, {
-        headers: headers2,
+      const result3 = await axios.get(`/api5/api/v1/devices`, {
+        headers: headers3,
       });
-      console.log(result2);
-      let arr2 = result2?.data?.devices.map((el) => el.serial);
-      setDeviceDetail2(arr2);
+      console.log(result3);
+      let arr3 = result3?.data?.devices.map((el) => el.serial);
+      setDeviceDetail3(arr3);
       setIsLoading(false);
-      setBeingUsed(result2.data.devices[0].using);
+      setBeingUsed(result3.data.devices[0].using);
     };
     fetchInfo();
   }, [beingUsed]);
@@ -39,16 +40,15 @@ const DeviceInfo1 = () => {
           Loading...
         </Spinner>
       ) : (
-        deviceDetail2 &&
-        deviceDetail2.map((el, index) => (
-          <SingleDevice className='device-card' key={index} deviceSerial={el} endpoint="api2"/>
+        deviceDetail3 &&
+        deviceDetail3.map((el, index) => (
+          <SingleDevice className='device-card' key={index} deviceSerial={el} endpoint="api5"/>
         ))
       )}
-    <div className='nav-container'><a target="_blank" href="api2"><img src={arrow} className="arrow" /></a></div>
-
+    <div className='nav-container'><a target="_blank" href="api5"><img src={arrow} className="arrow" /></a></div>
     </div>
     </div>
   );
 };
 
-export default DeviceInfo1;
+export default DeviceInfo4;

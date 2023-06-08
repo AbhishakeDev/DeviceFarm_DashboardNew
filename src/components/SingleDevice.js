@@ -18,22 +18,30 @@ const SingleDevice = ({ deviceSerial,endpoint }) => {
 
   const headers1 = {
     Authorization:
-      'Bearer 79b374d9c1ba493b824972456e0c5c74d0256e2b8dd0471fac9a6ee4a89b081b',
+      'Bearer 3843cef74f7042249cc1aca5f0a7d8226673c40d600946c0b7c134eb997dcc77',
   };
   const headers2 = {
     Authorization:
-      'Bearer b08255efb866439695382c3f9884b2e4bf1674e85561435c856624806ef795e2',
+      'Bearer f774b68e0d134f1fb503c318582f524c741316cf84194799957ba4aa098ef560',
   };
   const headers3 = {
     Authorization:
-      'Bearer 2db5ff785041433696f8dc5c47bd003d60052042983b4c84bbc6db0411d39748',
+      'Bearer e1cb11616e3343acaa0e031b5fd9abd338812a4964d84dafa93322247f4db169',
+  };
+  const headers4 = {
+    Authorization:
+      'Bearer a8e4b308b7c345858c1402eed34d4eb5a45e78ee93444288b653b45010ef5659',
+  };
+  const headers5 = {
+    Authorization:
+      'Bearer 192402ab37bd4f42892f0020d155428368c0775bf3c7449b944ab3566bde4d53',
   };
 
   useEffect(() => {
     const fetchInfo = async () => {
       // console.log(deviceSerial);
       const result = await axios.get(`/${endpoint}/api/v1/devices/` + deviceSerial, {
-        headers: endpoint==="api1"?headers1:(endpoint==="api2"?headers2:headers3),
+        headers: endpoint==="api1"?headers1:(endpoint==="api2"?headers2:(endpoint==="api3"?headers3:(endpoint==="api4"?headers4:headers5))),
       });
       setDevice(result.data.device);
       setIsLoading(false);
@@ -118,12 +126,12 @@ const SingleDevice = ({ deviceSerial,endpoint }) => {
               </h4>
             </div>
           )}
-          <Switch
+          {/* <Switch
             checked={checked}
             onChange={handleChange}
             color="primary"
             name="status"
-          />
+          /> */}
         </div>
         </Tooltip>
       )}

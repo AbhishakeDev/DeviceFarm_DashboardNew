@@ -14,7 +14,7 @@ const DeviceInfo2 = () => {
 
   const headers3 = {
     Authorization:
-      'Bearer 2db5ff785041433696f8dc5c47bd003d60052042983b4c84bbc6db0411d39748',
+      'Bearer e1cb11616e3343acaa0e031b5fd9abd338812a4964d84dafa93322247f4db169',
   };
 
   useEffect(() => {
