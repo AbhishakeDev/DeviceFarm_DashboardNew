@@ -51,3 +51,13 @@ box-shadow: 1.2rem 1.2rem 1.5rem rgba(0,0,0,.3);
 .noDisplay{
     display: none;
 }
+
+.white-text{
+    color: #fff;
+}
+
+.btn-custom{
+    background-color: #B4E4FF;
+    border: #B4E4FF solid;
+    border-radius: 50%;
+}

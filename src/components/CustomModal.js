@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Spinner } from 'reactstrap';
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import CustomModal2 from './CustomModal2';
+import './SingleDevice.css';
 
 var CustomModal = ({ buttonLabel, udid }) => {
   const [modal, setModal] = useState(false);
@@ -24,6 +25,15 @@ var CustomModal = ({ buttonLabel, udid }) => {
   var toggleModal = () => {
     setModal(!modal);
   };
+  var colorIndicator = (el) => {
+    var percent = el.passed / (el.passed + el.failed);
+    console.log(percent);
+    if (percent >= 0.9) return 'table-success';
+    if (percent <= 0.9 && percent > 0.8) return 'table-primary';
+    if (percent <= 0.8 && percent > 0.7) return 'table-warning';
+    if (percent <= 0.7) return 'table-danger';
+    return '';
+  };
 
   return (
     <div>
@@ -42,9 +52,9 @@ var CustomModal = ({ buttonLabel, udid }) => {
         <Modal className='modal-lg' isOpen={modal} toggle={() => toggleModal()}>
           <ModalHeader toggle={() => toggleModal()}>Reports List</ModalHeader>
           <ModalBody>
-            <table className='table table-striped table-dark table-hover'>
+            <table className='table table-striped table-hover text'>
               <thead className='thead-dark'>
-                <tr>
+                <tr className='bg-primary white-text'>
                   <th scope='col'>RunID</th>
                   <th scope='col'>Squad</th>
                   <th scope='col'>SuiteName</th>
@@ -56,40 +66,22 @@ var CustomModal = ({ buttonLabel, udid }) => {
               <tbody>
                 {tableData.map((el) => {
                   return (
-                    <tr>
-                      <th>{el.runId}</th>
-                      <th>{el.squad}</th>
-                      <th>{el.suitename}</th>
+                    <tr className={colorIndicator(el)}>
+                      <td>{el.runId}</td>
+                      <td>{el.squad}</td>
+                      <td>{el.suitename}</td>
                       {/* <th>{el.tests}</th> */}
-                      <th>{el.passed}</th>
-                      <th>{el.failed}</th>
-                      <th>
+                      <td>{el.passed}</td>
+                      <td>{el.failed}</td>
+                      <td>
                         <CustomModal2
                           buttonLabel={el.total}
                           testData={el.tests}
                         />
-                      </th>
+                      </td>
                     </tr>
                   );
                 })}
-                {/* <tr>
-                  <th scope='col'>1</th>
-                  {tableData.map((el) => (
-                    <td>{el.runId}</td>
-                  ))}
-                </tr>
-                <tr>
-                  <th scope='row'>2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope='row'>3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr> */}
               </tbody>
             </table>
           </ModalBody>
