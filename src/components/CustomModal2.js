@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import './SingleDevice.css';
 
 var CustomModal2 = ({ buttonLabel, testData }) => {
@@ -8,7 +8,6 @@ var CustomModal2 = ({ buttonLabel, testData }) => {
     setModal2(!modal2);
     console.log(testData);
   };
-
   return (
     <div>
       <button
@@ -20,9 +19,11 @@ var CustomModal2 = ({ buttonLabel, testData }) => {
         {buttonLabel}
       </button>
       <Modal className='modal-lg' isOpen={modal2} toggle={() => toggleModal2()}>
-        <ModalHeader toggle={() => toggleModal2()}>Tests List</ModalHeader>
+        <ModalHeader toggle={() => toggleModal2()}>
+          <span className='modal-title'></span>Testcase Status
+        </ModalHeader>
         <ModalBody>
-          <table className='table table-striped text'>
+          <table className='table text'>
             <thead className='bg-primary white-text'>
               <tr>
                 <th scope='col'>TestName</th>
@@ -35,7 +36,7 @@ var CustomModal2 = ({ buttonLabel, testData }) => {
                   <tr
                     className={
                       Object.values(testData)[index] === 'passed'
-                        ? 'table-primary'
+                        ? 'table-success'
                         : 'table-danger'
                     }
                   >

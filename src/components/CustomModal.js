@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Spinner } from 'reactstrap';
-import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import CustomModal2 from './CustomModal2';
+import CollapseTable from './CollapseTable';
 import './SingleDevice.css';
 
 var CustomModal = ({ buttonLabel, udid }) => {
@@ -35,23 +36,147 @@ var CustomModal = ({ buttonLabel, udid }) => {
     return '';
   };
 
+  var arr = {
+    '0B301JEC212177': {
+      failed: 8,
+      passed: 8,
+      runId: 1686653867943,
+      squad: 'SampleSuite',
+      suitename: 'Sanity_0B301JEC212177',
+      tests: {
+        tes1: 'passed',
+        tes11: 'passed',
+        tes13: 'passed',
+        tes15: 'passed',
+        tes3: 'passed',
+        tes5: 'passed',
+        tes7: 'passed',
+        tes9: 'passed',
+        test10: 'failed',
+        test12: 'failed',
+        test14: 'failed',
+        test16: 'failed',
+        test2: 'failed',
+        test4: 'failed',
+        test6: 'failed',
+        test8: 'failed',
+      },
+      total: 16,
+    },
+    '3BBB2D88-6CEB-4C7D-8DA7-58418FC79D78': {
+      failed: 8,
+      passed: 8,
+      runId: 1686653867943,
+      squad: 'SampleSuite',
+      suitename: 'Drytests',
+      tests: {
+        tes1: 'passed',
+        tes11: 'passed',
+        tes13: 'passed',
+        tes15: 'passed',
+        tes3: 'passed',
+        tes5: 'passed',
+        tes7: 'passed',
+        tes9: 'passed',
+        test10: 'failed',
+        test12: 'failed',
+        test14: 'failed',
+        test16: 'failed',
+        test2: 'failed',
+        test4: 'failed',
+        test6: 'failed',
+        test8: 'failed',
+      },
+      total: 16,
+    },
+    Pixel_4_and: {
+      failed: 8,
+      passed: 8,
+      runId: 1686653867943,
+      squad: 'SampleSuite',
+      suitename: 'Drytests_And',
+      tests: {
+        tes1: 'passed',
+        tes11: 'passed',
+        tes13: 'passed',
+        tes15: 'passed',
+        tes3: 'passed',
+        tes5: 'passed',
+        tes7: 'passed',
+        tes9: 'passed',
+        test10: 'failed',
+        test12: 'failed',
+        test14: 'failed',
+        test16: 'failed',
+        test2: 'failed',
+        test4: 'failed',
+        test6: 'failed',
+        test8: 'failed',
+      },
+      total: 16,
+    },
+    Pixel_6: {
+      failed: 17,
+      passed: 15,
+      runId: 1686653867943,
+      squad: 'SampleSuite',
+      suitename: 'Sanity',
+      tests: {
+        tes1: 'passed',
+        tes11: 'passed',
+        tes13: 'passed',
+        tes15: 'passed',
+        tes3: 'passed',
+        tes5: 'passed',
+        tes7: 'passed',
+        tes9: 'failed',
+        test10: 'failed',
+        test12: 'failed',
+        test14: 'failed',
+        test16: 'failed',
+        test2: 'failed',
+        test4: 'failed',
+        test6: 'failed',
+        test8: 'failed',
+        testsec1: 'passed',
+        testsec10: 'failed',
+        testsec11: 'passed',
+        testsec12: 'failed',
+        testsec13: 'passed',
+        testsec14: 'failed',
+        testsec15: 'passed',
+        testsec16: 'failed',
+        testsec2: 'failed',
+        testsec3: 'passed',
+        testsec4: 'failed',
+        testsec5: 'passed',
+        testsec6: 'failed',
+        testsec7: 'passed',
+        testsec8: 'failed',
+        testsec9: 'passed',
+      },
+      total: 32,
+    },
+  };
+
   return (
     <div>
-      <Button
-        className='btn btn-sm'
-        color='primary'
+      <button
+        className='card-btn'
         onClick={() => {
           toggleModal();
         }}
       >
         {buttonLabel}
-      </Button>
+      </button>
       {isLoading && tableData.length !== 0 ? (
         <Spinner color='primary'>Loading...</Spinner>
       ) : (
         <Modal className='modal-lg' isOpen={modal} toggle={() => toggleModal()}>
-          <ModalHeader toggle={() => toggleModal()}>Reports List</ModalHeader>
-          <ModalBody>
+          <ModalHeader className='modal-header' toggle={() => toggleModal()}>
+            <span className='modal-title'>Test Runs</span>
+          </ModalHeader>
+          <ModalBody className='modal-body'>
             <table className='table table-striped table-hover text'>
               <thead className='thead-dark'>
                 <tr className='bg-primary white-text'>
@@ -67,7 +192,9 @@ var CustomModal = ({ buttonLabel, udid }) => {
                 {tableData.map((el) => {
                   return (
                     <tr className={colorIndicator(el)}>
-                      <td>{el.runId}</td>
+                      <td>
+                        <CollapseTable buttonLabel={el.runId} testData={arr} />
+                      </td>
                       <td>{el.squad}</td>
                       <td>{el.suitename}</td>
                       {/* <th>{el.tests}</th> */}

@@ -34,6 +34,17 @@ box-shadow: 1.2rem 1.2rem 1.5rem rgba(0,0,0,.3);
     margin: 5px;
 }
 
+.card-btn{
+    border: #B4E4FF solid;
+    border-radius: 10px;
+    background-color: transparent;
+    font-size: 10px;
+}
+.card-btn:hover{
+    transform: scale(1.2);
+    transition: all 0.5s ease-in-out;
+}
+
 .busy{
     font-weight: bold;
     color: brown;
@@ -60,4 +71,44 @@ box-shadow: 1.2rem 1.2rem 1.5rem rgba(0,0,0,.3);
     background-color: #B4E4FF;
     border: #B4E4FF solid;
     border-radius: 50%;
+}
+
+.btn-custom{
+    background-color: #B4E4FF;
+    border: #B4E4FF solid;
+    border-radius: 2rem;
+    margin-bottom:5px ;
+    font-weight: 100;
+}
+
+.modal-header{
+    background-color: #B4E4FF;
+}
+
+.modal-title{
+    font-size: 30px;
+    font-weight: 100;
+}
+
+.table-custom{
+    margin-right: 5px;
+}
+
+.accordion-button{
+    padding: 0;
+}
+table {
+    border-spacing: 0px;
+    table-layout: fixed;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th {
+    border: 1px solid black;
+}
+
+td {
+    border: 1px solid black;
+    word-wrap: break-word;
 }
