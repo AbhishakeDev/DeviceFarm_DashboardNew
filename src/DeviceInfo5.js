@@ -51,4 +51,4 @@ const DeviceInfo5 = () => {
   );
 };
 
-export default DeviceInfo4;
+export default DeviceInfo5;

@@ -41,10 +41,10 @@ const DeviceInfo1 = () => {
       ) : (
         deviceDetail2 &&
         deviceDetail2.map((el, index) => (
-          <SingleDevice className='device-card' key={index} deviceSerial={el} endpoint="api2"/>
+          <SingleDevice className='device-card' key={index} deviceSerial={el} endpoint="api7"/>
         ))
       )}
-    <div className='nav-container'><a target="_blank" href="api2"><img src={arrow} className="arrow" /></a></div>
+    <div className='nav-container'><a target="_blank" href="api7"><img src={arrow} className="arrow" /></a></div>
 
     </div>
     </div>

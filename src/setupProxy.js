@@ -73,4 +73,17 @@ module.exports = function (app) {
       }
     })
   );
+  app.use(
+    createProxyMiddleware('/api7', {
+      target: 'http://10.30.1.30/', // API endpoint 5
+      changeOrigin: true,
+      rejectUnauthorized: false,
+      pathRewrite: {
+        "^/api7": "",
+      },
+      headers: {
+        Connection: "keep-alive"
+      }
+    })
+  );
 }
