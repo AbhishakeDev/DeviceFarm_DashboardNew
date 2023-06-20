@@ -8,7 +8,7 @@ import {
   AccordionItem,
 } from 'reactstrap';
 
-var CollapseTable = ({ buttonLabel, testData }) => {
+var SquadAccordian = ({ buttonLabel, testData }) => {
   const [modal2, setModal2] = useState(false);
   var toggleModal2 = () => {
     setModal2(!modal2);
@@ -39,8 +39,8 @@ var CollapseTable = ({ buttonLabel, testData }) => {
         </ModalHeader>
         <ModalBody>
           {testData.map((el, index) => {
-             const testNameArr = Object.keys(el.tests);
-            const testResultArr = Object.values(el.tests);
+             const testNameArr = Object.keys(el.rundetails.tests);
+            const testResultArr = Object.values(el.rundetails.tests);
             return (
               <Accordion open={open} toggle={() => toggle('' + (index + 1))}>
                 <AccordionItem>
@@ -48,7 +48,7 @@ var CollapseTable = ({ buttonLabel, testData }) => {
                     <table className='table-custom table table-striped table-hover text'>
                       <thead className='thead-dark'>
                         <tr className='bg-primary white-text'>
-                          <th scope='col'>RunId</th>
+                          <th scope='col'>DeviceID</th>
                           <th scope='col'>Failed</th>
                           <th scope='col'>Passed</th>
                           <th scope='col'>Total</th>
@@ -56,15 +56,15 @@ var CollapseTable = ({ buttonLabel, testData }) => {
                       </thead>
                       <tbody>
                         <tr>
-                          <td className='table-cell'>{el.runId}</td>
+                          <td className='table-cell'>{el.devicename}</td>
                           <td className='table-cell'>
-                            {el.failed}
+                            {el.rundetails.failed}
                           </td>
                           <td className='table-cell'>
-                            {el.passed}
+                            {el.rundetails.passed}
                           </td>
                           <td className='table-cell'>
-                            {el.total}
+                            {el.rundetails.total}
                           </td>
                         </tr>
                       </tbody>
@@ -100,20 +100,10 @@ var CollapseTable = ({ buttonLabel, testData }) => {
               </Accordion>
             );
           })}
-          {/* <AccordionItem>
-              <AccordionHeader targetId='1'>Accordion Item 1</AccordionHeader>
-              <AccordionBody accordionId='1'>
-                <strong>This is the first item&#39;s accordion body.</strong>
-                You can modify any of this with custom CSS or overriding our
-                default variables. It&#39;s also worth noting that just about
-                any HTML can go within the <code>.accordion-body</code>, though
-                the transition does limit overflow.
-              </AccordionBody>
-            </AccordionItem> */}
         </ModalBody>
       </Modal>
     </div>
   );
 };
 
-export default CollapseTable;
+export default SquadAccordian;

@@ -40,6 +40,11 @@ box-shadow: 1.2rem 1.2rem 1.5rem rgba(0,0,0,.3);
     background-color: transparent;
     font-size: 10px;
 }
+
+.card-btn-squad{
+    border: none;
+    background-color: transparent;
+}
 .card-btn:hover{
     transform: scale(1.2);
     transition: all 0.5s ease-in-out;
@@ -112,3 +117,14 @@ td {
     border: 1px solid black;
     word-wrap: break-word;
 }
+
+.dropdown{
+    transform: translate(400px);
+    z-index: 10;
+    margin-right: 20px;
+}
+
+.squad{
+    font-size: 13px;
+}
+

@@ -8,6 +8,7 @@ import img2 from '../android2.png';
 import Switch from '@mui/material/Switch';
 import Tooltip from '@mui/material/Tooltip';
 import CustomModal from './CustomModal';
+import SquadDropDown from './SquadDropDown';
 
 const SingleDevice = ({ deviceSerial, endpoint }) => {
   const [beingUsed, setBeingUsed] = useState(false);

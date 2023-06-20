@@ -1,24 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Spinner } from 'reactstrap';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
-import CustomModal2 from './CustomModal2';
-import CollapseTable from './CollapseTable';
 import './SingleDevice.css';
+import SquadAccordian from './SquadAccordian';
 
-var CustomModal = ({ buttonLabel, udid }) => {
+var CustomModalSquad = ({ buttonLabel, squad }) => {
   const [modal, setModal] = useState(false);
   const [tableData, setTableData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     var fetchTableData = async () => {
       const result = await axios.get(
-        `http://assortment-nlp.qa2-sg.cld/devicefarm/getDeviceRuns/` + udid
+        `http://assortment-nlp.qa2-sg.cld/devicefarm/getRunDetailsBySquad/` + squad
       );
       console.log(result.data);
       setTableData(result.data);
-      setIsLoading(false);
     };
     fetchTableData();
   }, [modal]);
@@ -36,19 +32,18 @@ var CustomModal = ({ buttonLabel, udid }) => {
     return '';
   };
 
+ 
+
   return (
     <div>
       <button
-        className='card-btn'
+        className='card-btn-squad'
         onClick={() => {
           toggleModal();
         }}
       >
         {buttonLabel}
       </button>
-      {isLoading && tableData.length !== 0 ? (
-        <Spinner color='primary'>Loading...</Spinner>
-      ) : (
         <Modal className='modal-lg' isOpen={modal} toggle={() => toggleModal()}>
           <ModalHeader className='modal-header' toggle={() => toggleModal()}>
             <span className='modal-title'>Test Runs</span>
@@ -58,11 +53,8 @@ var CustomModal = ({ buttonLabel, udid }) => {
               <thead className='thead-dark'>
                 <tr className='bg-primary white-text'>
                   <th scope='col'>RunID</th>
-                  <th scope='col'>Squad</th>
-                  <th scope='col'>SuiteName</th>
-                  <th scope='col'>Passed</th>
-                  <th scope='col'>Failed</th>
-                  <th scope='col'>Total</th>
+                  <th scope='col'>StartTime</th>
+                  <th scope='col'>EndTime</th>
                 </tr>
               </thead>
               <tbody>
@@ -70,19 +62,10 @@ var CustomModal = ({ buttonLabel, udid }) => {
                   return (
                     <tr className={colorIndicator(el)}>
                       <td>
-                        <CollapseTable buttonLabel={el.runId} testData={tableData} />
+                        <SquadAccordian buttonLabel={el.runId} testData={el.runs} />
                       </td>
-                      <td>{el.squad}</td>
-                      <td>{el.suitename}</td>
-                      {/* <th>{el.tests}</th> */}
-                      <td>{el.passed}</td>
-                      <td>{el.failed}</td>
-                      <td>
-                        <CustomModal2
-                          buttonLabel={el.total}
-                          testData={el.tests}
-                        />
-                      </td>
+                      <td>{el.starttime}</td>
+                      <td>{el.endtime}</td>
                     </tr>
                   );
                 })}
@@ -90,9 +73,8 @@ var CustomModal = ({ buttonLabel, udid }) => {
             </table>
           </ModalBody>
         </Modal>
-      )}
     </div>
   );
 };
 
-export default CustomModal;
+export default CustomModalSquad;
