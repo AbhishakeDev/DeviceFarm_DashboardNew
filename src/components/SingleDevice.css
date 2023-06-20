@@ -1,18 +1,3 @@
-/* .mid{
-    text-align: center;
-    padding: 30px 50px 30px 50px !important; 
-    margin: 20px !important;
-    font-family: sans-serif;   
-} */
-/* width: 11.875em;
-height: 15.875em;
-padding: 1rem;
-background-color: rgba(255, 255, 255, 0.074);
-border: 1px solid rgba(255, 255, 255, 0.222);
--webkit-backdrop-filter: blur(20px);
-backdrop-filter: blur(20px);
-border-radius: .7rem;
-transition: all ease .3s; */
 
 .btn-container{
     display: flex;
@@ -20,20 +5,21 @@ transition: all ease .3s; */
   align-items: center;
   justify-content: center;
 }
-
 .card{
-    width: 300px;
-height: 200px;
+    width: 200px;
+height: 100px;
 text-align: center;
 margin: 20px !important;
-border-radius: .7rem;
 padding: 10px;
+border-radius: 8px;
+border: 1px solid #eaeaea;
+box-shadow: 1.2rem 1.2rem 1.5rem rgba(0,0,0,.3);
 }
 
 .text{
     font-size: 10px;   
     font-family: sans-serif;    
-    text-align: center;
+    text-align: left;
     font-weight: lighter;
 }
 
@@ -43,9 +29,25 @@ padding: 10px;
 }
 
 .img{
-    height: 110px;
+    height: 60px;
     width: 60px;
-    margin: 20px;
+    margin: 5px;
+}
+
+.card-btn{
+    border: #B4E4FF solid;
+    border-radius: 10px;
+    background-color: transparent;
+    font-size: 10px;
+}
+
+.card-btn-squad{
+    border: none;
+    background-color: transparent;
+}
+.card-btn:hover{
+    transform: scale(1.2);
+    transition: all 0.5s ease-in-out;
 }
 
 .busy{
@@ -65,3 +67,64 @@ padding: 10px;
 .noDisplay{
     display: none;
 }
+
+.white-text{
+    color: #fff;
+}
+
+.btn-custom{
+    background-color: #B4E4FF;
+    border: #B4E4FF solid;
+    border-radius: 50%;
+}
+
+.btn-custom{
+    background-color: #B4E4FF;
+    border: #B4E4FF solid;
+    border-radius: 2rem;
+    margin-bottom:5px ;
+    font-weight: 100;
+}
+
+.modal-header{
+    background-color: #B4E4FF;
+}
+
+.modal-title{
+    font-size: 30px;
+    font-weight: 100;
+}
+
+.table-custom{
+    margin-right: 5px;
+}
+
+.accordion-button{
+    padding: 0;
+}
+table {
+    border-spacing: 0px;
+    table-layout: fixed;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th {
+    border: 1px solid black;
+}
+
+td {
+    border: 1px solid black;
+    word-wrap: break-word;
+}
+
+.dropdown{
+    transform: translate(400px);
+    z-index: 10;
+    margin-right: 20px;
+}
+
+.squad{
+    font-size: 13px;
+}
+
