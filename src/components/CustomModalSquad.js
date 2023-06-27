@@ -12,7 +12,7 @@ var CustomModalSquad = ({ buttonLabel, squad }) => {
   useEffect(() => {
     var fetchTableData = async () => {
       const result = await axios.get(
-        `http://assortment-nlp.qa2-sg.cld/devicefarm/getRunDetailsBySquad/` + squad
+        `api8/devicefarm/getRunDetailsBySquad/` + squad
       );
       console.log(result.data);
       setTableData(result.data);

@@ -14,7 +14,7 @@ var CustomModal = ({ buttonLabel, udid }) => {
   useEffect(() => {
     var fetchTableData = async () => {
       const result = await axios.get(
-        `http://assortment-nlp.qa2-sg.cld/devicefarm/getDeviceRuns/` + udid
+        `api8/devicefarm/getDeviceRuns/` + udid
       );
       console.log(result.data);
       setTableData(result.data);

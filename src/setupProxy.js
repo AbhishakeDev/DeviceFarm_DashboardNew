@@ -61,4 +61,16 @@ module.exports = function (app) {
       }
     })
   );
+  app.use(
+    createProxyMiddleware('/api8', {
+      target: 'http://assortment-nlp.qa2-sg.cld/', // API endpoint 5
+      changeOrigin: true,
+      pathRewrite: {
+        "^/api8": "",
+      },
+      headers: {
+        Connection: "keep-alive"
+      }
+    })
+  );
 }

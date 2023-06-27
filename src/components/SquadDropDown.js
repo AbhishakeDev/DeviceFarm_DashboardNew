@@ -12,7 +12,7 @@ function SquadDropDown() {
     useEffect(()=>{
     var getSquadData = async () => {
         const result = await axios.get(
-            `http://assortment-nlp.qa2-sg.cld/devicefarm/getAllSquads`
+            `api8/devicefarm/getAllSquads`
           );
           console.log(result.data);
           setSquadData(result.data);
