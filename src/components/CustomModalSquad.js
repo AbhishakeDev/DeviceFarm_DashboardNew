@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import './SingleDevice.css';
 import SquadAccordian from './SquadAccordian';
+import {Spinner} from 'reactstrap';
 
 var CustomModalSquad = ({ buttonLabel, squad }) => {
   const [modal, setModal] = useState(false);
@@ -58,7 +59,8 @@ var CustomModalSquad = ({ buttonLabel, squad }) => {
                 </tr>
               </thead>
               <tbody>
-                {tableData.map((el) => {
+                {tableData.length > 0  ? <>
+                  {tableData.map((el) => {
                   return (
                     <tr className={colorIndicator(el)}>
                       <td>
@@ -69,6 +71,11 @@ var CustomModalSquad = ({ buttonLabel, squad }) => {
                     </tr>
                   );
                 })}
+                </> : <Spinner
+          color='dark'
+        >
+          Loading...
+        </Spinner>}
               </tbody>
             </table>
           </ModalBody>

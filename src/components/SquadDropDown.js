@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
-
+import {Spinner} from 'reactstrap';
 import axios from 'axios';
 import './SingleDevice.css';
 import CustomModalSquad from './CustomModalSquad';
@@ -40,9 +40,16 @@ function SquadDropDown() {
     </Dropdown.Toggle>
 
     <Dropdown.Menu>
-    {squadData.map((el,index) => <Dropdown.Item className='text' key={index}><CustomModalSquad buttonLabel={el} squad={el}/></Dropdown.Item>)}
+    {squadData.length > 0 ? <>
+      {squadData.map((el,index) => <Dropdown.Item className='text' key={index}><CustomModalSquad buttonLabel={el} squad={el}/></Dropdown.Item>)}</> : <Spinner
+          color='dark'
+        >
+          Loading...
+        </Spinner>}
+    
     </Dropdown.Menu>
   </Dropdown>
+
   );
 }
 
